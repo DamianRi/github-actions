@@ -16,3 +16,10 @@ jobs:
         steps:
             - name: Hola Mundo 2
               run: echo "Hola Mundo 2"
+
+    third-job:
+        # Se ejecuta si la referencia es main
+        if: ${{ github.ref == 'refs/heads/main' }}
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo ${{ github.ref }}
