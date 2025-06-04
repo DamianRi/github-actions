@@ -50,6 +50,7 @@ jobs:
 
     # Uso de acciones
     fifth-job:
+        if: false
         runs-on: ubuntu-latest
         steps:
             - name: Working dir
@@ -62,6 +63,7 @@ jobs:
 
     # Paso de valores entre steps
     sixth-job:
+        if: false
         runs-on: ubuntu-latest
         outputs:
             my-variable: ${{ steps.set_variable.outputs.my-variable }}
@@ -73,7 +75,8 @@ jobs:
             - name: Obtener mensaje del paso anterior
               run: echo "${{ steps.set_variable.outputs.my-variable }}"
 
-    eighth-job:
+    seventh-job:
+        if: false
         needs: sixth-job
         runs-on: ubuntu-latest
         env:
@@ -81,3 +84,16 @@ jobs:
         steps:
             - name: Reading shared variable
               run: echo "${{ env.MY_VAR }}"
+
+    eighth-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Generar archivo
+              run: |
+                echo "Archivo de prueba" >> archivo.log
+            
+            - name: Subir artefacto
+              uses: actions/upload-artifact@v4
+              with:
+                name: archivo-log
+                path: archivo.log
