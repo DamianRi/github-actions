@@ -1,0 +1,16 @@
+name: Startegy
+
+on: push
+
+jobs:
+    first-job:
+        runs-on: ubuntu-latest
+
+        # Ejecutará este job tantas veces como elementos en la matriz
+        strategy:
+            matrix:
+                message: ['Hola', 'DamiánRi', 'Github Actions']
+        
+        steps:
+            - name: Print message
+              run: echo "${{ matrix.message}}"

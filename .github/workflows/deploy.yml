@@ -1,10 +1,8 @@
 name: Deploy to server
-
 on: push
 env:
     WORKFLOW_VAR: variable workflow
     GENERAL_VAR: variable general
-
 jobs:
     first-job:
         if: false
