@@ -107,4 +107,4 @@ jobs:
               with:
                 name: archivo-log
             - name: Cat file
-              run: cat archivo-log
+              run: cat archivo.log
