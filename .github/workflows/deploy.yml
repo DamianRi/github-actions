@@ -24,7 +24,8 @@ jobs:
 
     third-job:
         # Se ejecuta si la referencia es master
-        if: ${{ github.ref == 'refs/heads/master' }}
+        # if: ${{ github.ref == 'refs/heads/master' }}
+        if: false
         runs-on: ubuntu-latest
         steps:
             - run: echo ${{ github.ref }}
@@ -58,3 +59,14 @@ jobs:
               uses: actions/checkout@v4
             - name: Working dir
               run: ls -al
+
+    # Paso de valores entre steps
+    sixth-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Set variable
+              id: set_variable
+              run: echo "my-variable=HolaMundo" >> $GITHUB_OUTPUT
+
+            - name: Obtener mensaje del paso anterior
+              run: echo "${{ steps.set_variable.outputs.my-variable }}"
