@@ -1,4 +1,4 @@
-name: Startegy
+name: Strategy
 
 on: push
 
@@ -9,8 +9,9 @@ jobs:
         # Ejecutará este job tantas veces como elementos en la matriz
         strategy:
             matrix:
+                # Genera todas las combinaciones posibles
                 message: ['Hola', 'DamiánRi', 'Github Actions']
-        
+                version: [v1, v2, v3]
         steps:
             - name: Print message
-              run: echo "${{ matrix.message}}"
+              run: echo "${{ matrix.message}}${{ matrix.version}}"
