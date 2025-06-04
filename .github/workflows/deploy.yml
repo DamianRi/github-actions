@@ -1,9 +1,13 @@
 name: Deploy to server
 
 on: push
+env:
+    WORKFLOW_VAR: variable workflow
+    GENERAL_VAR: variable general
 
 jobs:
     first-job:
+        if: false
         runs-on: ubuntu-latest
 
         steps:
@@ -11,6 +15,7 @@ jobs:
               run: echo "Hola Mundo"
 
     second-job:
+        if: false
         needs: first-job
         runs-on: ubuntu-latest
         steps:
@@ -23,3 +28,20 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - run: echo ${{ github.ref }}
+            - run: echo ${{ github.ref_name }}
+    
+    fourth-job:
+        runs-on: ubuntu-latest
+        env:
+            JOB_VAR: variable de job
+            GENERAL_VAR: variable general del job 
+        steps:
+            - name: step1
+              env:
+                STEP_VAR: variable de step
+                GENERAL_VAR: variable general de step
+              run: |
+                echo "${{ env.WORKFLOW_VAR }}"
+                echo "${{ env.JOB_VAR }}"
+                echo "${{ env.STEP_VAR }}"
+                echo "${{ env.GENERAL_VAR }}"
