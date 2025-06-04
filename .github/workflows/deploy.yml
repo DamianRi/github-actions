@@ -31,6 +31,7 @@ jobs:
             - run: echo ${{ github.ref_name }}
     
     fourth-job:
+        if: false
         runs-on: ubuntu-latest
         env:
             JOB_VAR: variable de job
@@ -45,3 +46,12 @@ jobs:
                 echo "${{ env.JOB_VAR }}"
                 echo "${{ env.STEP_VAR }}"
                 echo "${{ env.GENERAL_VAR }}"
+
+    # Uso de acciones
+    fifth-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Working dir
+              run: ls -al
+            - name: Checkout action
+              uses: actions/checkout@v4
