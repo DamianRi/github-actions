@@ -97,3 +97,14 @@ jobs:
               with:
                 name: archivo-log
                 path: archivo.log
+
+    nineth-job:
+        needs: eighth-job
+        runs-on: ubuntu-latest
+        steps:
+            - name: Descargar artefacto
+              uses: actions/download-artifact@v4
+              with:
+                name: archivo-log
+            - name: Cat file
+              run: cat archivo-log
