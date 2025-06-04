@@ -63,6 +63,8 @@ jobs:
     # Paso de valores entre steps
     sixth-job:
         runs-on: ubuntu-latest
+        outputs:
+            my-variable: ${{ steps.set_variable.outputs.my-variable }}
         steps:
             - name: Set variable
               id: set_variable
@@ -70,3 +72,12 @@ jobs:
 
             - name: Obtener mensaje del paso anterior
               run: echo "${{ steps.set_variable.outputs.my-variable }}"
+
+    eighth-job:
+        needs: sixth-job
+        runs-on: ubuntu-latest
+        env:
+            MY_VAR: ${{ needs.sixth-job.outputs.my-variable }}
+        steps:
+            - name: Reading shared variable
+              run: echo "${{ env.MY_VAR }}"
